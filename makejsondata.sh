@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 #
 # This is a test script to generate JSON data for the
-# Laravel BioMonitor system. It can generate the 3 data
-# record types. Temperature, Gasflow and LightReadings
+# Laravel BioMonitor system. It can generate the 4 data
+# record types. Temperature, Gasflow, LightReadings and pH.
 #
-# %1 the type of record 't' 'g' 'l'
+# %1 the type of record 't' 'g' 'l' 'p'
 # %2 is the deviceid. If not specified then uses '00002'
 #
 # This script assumes the existence of a master json text file
@@ -16,7 +16,7 @@
 #   [{"deviceid": "_deviceid_","_valuename_":_value_,"recorded_on":"_recorded_on_"}]
 #
 # The _recorded_on_ date is set to the current date and time.
-# The _valuename_ is set to temperature,lux or flow
+# The _valuename_ is set to temperature, lux, flow or ph
 # The _deviceid_ is set to the %2 parameter (or 00002 if none passed)
 #
 # The _value_ is set to a random value appropriate for each datatype:
@@ -24,8 +24,9 @@
 #  temperatures: 18.0 through 35.0 or so
 #  gasflow       1.0 through 10.0 or so
 #  lightreading  200 through 10000 or so
+#  ph            1.0 through 10.0 or so
 #
-#  Note: Gasflows need to be storeed as >= 1 because otherwise the client side 
+#  Note: Gasflows need to be stored as >= 1 because otherwise the client side
 #        javascript Chart library has a fit.
 #        So just to make life easier, we will multiply the actual readings
 #        to make them fit this and then note that on the chart scale.
@@ -52,7 +53,7 @@ NOW=$(date +"%Y-%m-%d %H:%M:%S")
 
 # make sure there is a data type parameter
 if [ $# -eq 0 ]; then
- >&2 echo "Missing parameter for data type. Need t or g or l"
+ >&2 echo "Missing parameter for data type. Need t or g or l or p"
  exit 1
 fi
 
@@ -70,8 +71,12 @@ case "$1" in
   VALUENAME="lux"
   VALUE=$(( ( RANDOM % 10000 )  + 200 ))
   ;;
+ p)
+  VALUENAME="ph"
+  VALUE=$(( ( RANDOM % 9 )  + 1 )).$(( ( RANDOM % 9 ) ))
+  ;;
  *)
-  >&2 echo "Bad parameter for data type. Need t or g or l"
+  >&2 echo "Bad parameter for data type. Need t or g or l or p"
   exit 1
   ;;
 esac

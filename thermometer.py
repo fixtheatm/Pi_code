@@ -2,6 +2,8 @@
 # formats the result and outputs a json text file into the
 # data folder
 #
+# IMPORTANT! The device id of 00002 is currently hard coded
+#            The thermometer id is currently hard coded as well
 #
 import os
 import glob
@@ -14,49 +16,22 @@ import time
 #
 #   ls /sys/bus/w1/devices
 #                  chip            probe version
-# our therm_ids are 28-000007080860 28-0000075d2009 28-041590822aff
-
-bioreactor_folder='/usr/local/bin/BioReactor/'
-
-# get the device_id from the file 'device_id'. This id is hard coded for 
-# each customer's raspberry as a different id!!
-
-device_id_filename=bioreactor_folder + 'device_id'
-
-idfile= open(device_id_filename, 'r')
-device_id= idfile.readline()
-idfile.close()
-
-device_id=device_id.strip('\n')
-
-#print(device_id)
-
-# We have a startup script named get_therm_id.sh which runs at reboot
-# It determines the thermometer id and places that in the file 'thermometer_id
-# We will just read it. Note we strip the string to avoid the newline character!
-
-id_filename=bioreactor_folder + 'thermometer_id'
-
-idfile= open(id_filename, 'r')
-therm_id= idfile.readline()
-idfile.close()
-
-device_path='/sys/bus/w1/devices/' + therm_id.strip('\n') + '/w1_slave'
-
-#print(device_path)
+# our deviceid is 28-000007080860 28-0000075d2009
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
 
+json_folder='/usr/local/bin/BioReactor/'
 json_date= time.strftime('%Y%m%d_%H%M%S')
 
-json_file=bioreactor_folder + 'bio_temp_' + json_date + '.json'
+json_file=json_folder + 'bio_temp_' + json_date + '.json'
 
+deviceid='00002'
 
 recorded_on = time.strftime('%Y-%m-%d %H:%M:%S')
 
 lst=[]
-lst.append(device_path)
+lst.append('/sys/bus/w1/devices/28-0000075d2009/w1_slave')
 
 def get_temp(device):
     f = open(device, 'r')
@@ -81,7 +56,7 @@ for device in lst:
     stemp = "%4.1f" % (get_temp(device))
 
     with open(json_file, 'w') as f:
-        s='[{"device_id":"' + device_id + '","temperature":"' + stemp + '","recorded_on":' + \
+        s='[{"deviceid":"' + deviceid + '","temperature":"' + stemp + '","recorded_on":' + \
             '"' + recorded_on + '"}]'
         f.write(s)
         f.close()

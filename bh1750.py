@@ -18,23 +18,12 @@
 import smbus
 import time
 
-bioreactor_folder='/usr/local/bin/BioReactor/'
+json_folder='/usr/local/bin/BioReactor/'
 json_date= time.strftime('%Y%m%d_%H%M%S')
 
-json_file=bioreactor_folder + 'bio_light_' + json_date + '.json'
+json_file=json_folder + 'bio_light_' + json_date + '.json'
 
-# get the device_id from the file 'device_id'. This id is hard coded for 
-# each customer's raspberry as a different id!!
-
-device_id_filename=bioreactor_folder + 'device_id'
-
-idfile= open(device_id_filename, 'r')
-device_id= idfile.readline()
-idfile.close()
-
-device_id=device_id.strip('\n')
-
-#print(device_id)
+deviceid='00002'
 
 recorded_on = time.strftime('%Y-%m-%d %H:%M:%S')
 
@@ -80,7 +69,7 @@ def main():
   slux = "%7.1f" % (readLight())
 
   with open(json_file, 'w') as f:
-    s='[{"deviceid":"' + device_id + '","lux":"' + slux.strip() + '","recorded_on":' + \
+    s='[{"deviceid":"' + deviceid + '","lux":"' + slux + '","recorded_on":' + \
             '"' + recorded_on + '"}]'
     f.write(s)
     f.close()

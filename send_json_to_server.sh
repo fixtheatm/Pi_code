@@ -10,17 +10,6 @@
 # It detects whether we are on the Windows development machine
 #  or whether we are on the Raspberry Pi Linux machine
 #
-# set this to true to send the data to the Cloud Server.
-# false to send the data to the local network development server
-CloudServer=true
-
-# name of the server we are posting to.
-# 
-SERVER="bioreactor.dev"
-if ( $CloudServer )
-then
-	SERVER="2Connect2Biz.com"
-fi
 
 # see which platform we are on. Windows is for testing.
 # Linux is raspberry pi production
@@ -31,6 +20,9 @@ then
 	Linux=true
 fi
 
+# name of the server we are posting to.
+#
+SERVER="2Connect2Biz.com"
 
 # root folder where are json files are being stored
 # on Windows we are using "./" On the raspberry pi it will be "/usr/local/bin/bioreactor/"
@@ -45,6 +37,7 @@ fi
 JSON_TEMP_WILDCARD="bio_temp*.json"
 JSON_GAS_WILDCARD="bio_gas*.json"
 JSON_LIGHT_WILDCARD="bio_light*.json"
+JSON_PH_WILDCARD="bio_ph*.json"
 
 # the folder where we are moving the json files that have been 
 # successfully posted to the server
@@ -58,7 +51,7 @@ LOG_FILE="httpsend.log"
 # the logfile will reside in the root folder
 LOG_FILE=$ROOT_FOLDER$LOG_FILE
 
-# Moves the datafile to the sent folder
+# Move the datafile to the sent folder
 #
 # @parameter string filename to move
 # @parameter string logdate
@@ -83,7 +76,7 @@ function moveJsonToSentFolder() {
 }
 
 
-# Sends the datafile to the server
+# Send the datafile to the server
 #
 # @parameter string filename to send (it is full path)
 #
@@ -93,7 +86,7 @@ function sendJsonToServer() {
 	local route=$2
     	local logdate=$(date +"%Y_%m_%d_%H_%M_%S")
 
-	echo "$logdate Posting ["$fname"] to Server ["$SERVER"] with route ["$route"]" >> $LOG_FILE
+	echo "$logdate Posting ["$fname"] to Server with route ["$route"]" >> $LOG_FILE
 
 	if http --check-status --timeout=2.5 POST http://$SERVER/$route < $fname &> /dev/null; then
 		moveJsonToSentFolder "$fname" "$logdate"
@@ -109,7 +102,6 @@ function sendJsonToServer() {
 	fi
 }
 
-# some test code. Uncomment to use it.
 #echo "["$OSTYPE"]["$Linux"]"
 #echo "["$ROOT_FOLDER$JSON_TEMP_WILDCARD"]"
 #exit 0
@@ -117,8 +109,7 @@ function sendJsonToServer() {
 # this line deals with the case where there are no files
 shopt -s nullglob
 
-# cycle through all the json bioreactor files in the folder.
-# once for each type of datafile
+# cycle through all the json bioreactor files in the folder
 for f in $ROOT_FOLDER$JSON_TEMP_WILDCARD
 do
 	sendJsonToServer $f pitemp
@@ -130,6 +121,10 @@ done
 for f in $ROOT_FOLDER$JSON_LIGHT_WILDCARD
 do
 	sendJsonToServer $f pilight
+done
+for f in $ROOT_FOLDER$JSON_PH_WILDCARD
+do
+	sendJsonToServer $f piph
 done
 
 exit 0
