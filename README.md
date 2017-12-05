@@ -4,23 +4,50 @@ This is part of the [Fixing the Atmosphere](http://www.fixingtheatmosphere.com/)
 
 ## Programs, Scripts, Tools
 
-send_json_to_server.sh
-: Script to be run regularly to transfer collected reading to the website database
+<dl>
+<dt>genericsensor.py</dt>
+<dd>Base classs inherited by all concrete sensors.</dd>
 
-thermometer.py
-: Program to read the current temperature sensor, and save the information in a json file
+<dt>sensor_gas.py</dt>
+<dd>Monitor and report discrete gas (oxygen) flow steps.</dd>
 
-bh1750.py
-: sample program to read the I2C digital light sensor
+<dt>sensor_light.py</dt>
+<dd>Report instantaneous light intensity measurments.</dd>
 
-get_therm_id.sh
-: The original shell script to determine the address of an attached 1-wire device.
+<dt>sensor_ph.py</dt>
+<dd>Report instantaneous pH measurments.</dd>
 
-make3jsonposts.sh
-: A test script to generate fake data for all of the sensor.  This can be used when testing sending of data to the website.
+<dt>sensor_temperature.py</dt>
+<dd>Report instantaneous temperature measurments.</dd>
 
-makejsondata.sh
-: A test script to generate fake data for a single specified sensor.
+<dt>Adafruit_ADS1x15.py</dt>
+<dd>Library dependency for ADC used for pH measurments.</dd>
 
-master_datavalue.json
-: A template used to generate fake data in the (website) expected json format.
+<dt>Adafruit_I2C.py</dt>
+<dd>Library dependency for Adafruit_ADS1x15.py</dd>
+
+<dt>send_json_to_server.sh</dt>
+<dd>Script to be run regularly to transfer collected reading to the website database.</dd>
+
+<dt>thermometer.py</dt>
+<dd>Program to read the current temperature sensor, and save the information in a json file.</dd>
+
+<dt>bh1750.py</dt>
+<dd>Sample program to read the I2C digital light sensor.</dd>
+
+<dt>get_therm_id.sh</dt>
+<dd>The original shell script to determine the address of an attached 1-wire device.</dd>
+
+<dt>make3jsonposts.sh</dt>
+<dd>A test script to generate fake data for all of the sensor.  This can be used when testing sending of data to the website.</dd>
+
+<dt>makejsondata.sh</dt>
+<dd>A test script to generate fake data for a single specified sensor.</dd>
+
+<dt>master_datavalue.json</dt>
+<dd>A template used to generate fake data in the (website) expected json format.</dd>
+
+## Reference information sources
+
+* [BH1750FVI](https://www.raspberrypi-spy.co.uk/2015/03/bh1750fvi-i2c-digital-light-intensity-sensor/)  I2C Digital Light Intensity Sensor
+* [ADS1115](https://www.adafruit.com/product/1085) I2C ADC
