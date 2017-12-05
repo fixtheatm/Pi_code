@@ -17,6 +17,12 @@ This is part of the [Fixing the Atmosphere](http://www.fixingtheatmosphere.com/)
 <dt>sensor_temperature.py</dt>
 <dd>Report instantaneous temperature measurments.</dd>
 
+<dt>temperature.py</dt>
+<dd>import file that specifies the 1-wire device id for the temperature sensor.</dd>
+
+<dt>photobioreactor.py</dt>
+<dd>import file that specifies the id for the local PhotoBioReactor station.</dd>
+
 <dt>send_json_to_server.sh</dt>
 <dd>Script to be run regularly to transfer collected reading to the website database.</dd>
 
