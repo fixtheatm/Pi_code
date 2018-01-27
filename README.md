@@ -40,5 +40,6 @@ This is part of the [Fixing the Atmosphere](http://www.fixingtheatmosphere.com/)
 
 ## Reference information sources
 
-* [BH1750FVI](https://www.raspberrypi-spy.co.uk/2015/03/bh1750fvi-i2c-digital-light-intensity-sensor/)  I2C Digital Light Intensity Sensor
+* [BH1750FVI](https://www.raspberrypi-spy.co.uk/2015/03/bh1750fvi-i2c-digital-light-intensity-sensor/) I2C Digital Light Intensity Sensor
 * [ADS1115](https://www.adafruit.com/product/1085) I2C ADC
+* [DS18B20](https://www.adafruit.com/product/381) 1 Wire temperature sensor
