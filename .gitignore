@@ -1,3 +1,8 @@
 *.pyc
 photobioreactor.py
 temperature.py
+httpsend.log
+__pycache__
+datalog
+sent
+bio*.json

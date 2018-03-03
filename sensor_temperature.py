@@ -4,6 +4,7 @@
 Handle a one wire temperature sensor (DS18B20)
 """
 
+import os
 from datetime import datetime
 from genericsensor import Sensor
 import temperature
@@ -83,8 +84,10 @@ class TemperatureSensor(Sensor):
 
     @staticmethod
     def save_temperature_path(address: str):
-        '''Save the address of the detected sensor, so do not need to repeat the lookup every time'''
-        with open(TemperatureSensor.IMPORT_SPEC, 'w') as import_fl:
+        '''Save the address of the detected sensor: shortcut next lookup'''
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        import_path = os.path.join(dir_path, TemperatureSensor.IMPORT_SPEC)
+        with open(import_path, 'w') as import_fl:
             import_fl.write("address = '{}'\n".format(address))
 
     def _monitor_value(self, callback):

@@ -111,6 +111,7 @@ class Sensor(object):
             jfile.write(file_str)
             # json.dump([sensor_data], jfile)
         # Append data value to log.
-        log_file = "datalog/" + json_prefix + ".csv"
+
+        log_file = Sensor.json_folder + "datalog/" + json_prefix + ".csv"
         with open(log_file, 'a') as log_f:
             log_f.write('{},{}\n'.format(recorded_on, value_str))

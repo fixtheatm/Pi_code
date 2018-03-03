@@ -5,7 +5,6 @@
 * [Protoboard Assembly](#link_assembly)
 * [Sensor Wiring](#link_wiring)
 * [Reference](#link_reference) information
-</br></br>
 
 ## <a name="link_parts"></a>Parts
 
