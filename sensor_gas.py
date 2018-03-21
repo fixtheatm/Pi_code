@@ -131,6 +131,6 @@ if __name__ == '__main__':
     print('GPIO version {}'.format(GPIO.VERSION))  # DEBUG
     SENSOR = GasSensor()
     SENSOR.start_monitor(SENSOR.gas_callback)
-#    SENSOR.wait_monitor()
+    SENSOR.wait_monitor()
 
     GPIO.cleanup()
