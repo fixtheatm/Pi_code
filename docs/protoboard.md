@@ -61,7 +61,7 @@ The following uses the hole labelling on the Gikfun protoboard.  The [layout](br
 
 ## <a name="link_assembly"></a>Protoboard Assembly
 
-The [Layout](#link_layout) section describes where the pieces actually go.  This provides tips on the order to insert and solder the parts.  Soldering the Pi cobbler and headers first would make it easier to see where the wires belong.  However, that makes getting the wires into position, and soldering them in place more difficult.  Instead, I recommend doing all of the wires first, then the resistor, Pi cobbler, and finally the headers.
+The [Layout](#link_layout) section describes where the pieces actually go.  This provides tips on the order to insert and solder the parts.  Soldering the Pi cobbler and headers first would make it easier to see where the wires belong.  However, that makes getting the wires into position, and soldering them in place more difficult.  Instead, I recommend doing all of the wires first, then the resistors, Pi cobbler, and finally the headers.
 
 At any stage of the wiring, the cobbler and/or headers can be inserted temporarily, to verify that the wires are going to the right pins.
 
@@ -78,7 +78,7 @@ Step by step:
 * green wire (SCL) from a4 to a13
   * This can use a5 instead of a4 (cleaner some ways), but the spacing is very tight with JP3 (the 5 pin header).  Want to make sure that the header can be inserted all of the way, sitting flat against the protoboard.
 * white wire (GPIO4) from f6 to c14
-  * leave slack to bend it to avoid the cobbler pins and JP3.  I also bent it around the ground wire at f7 to e7.  I like the wire to lay flat on the protoboard where possible, instead of crossing over each other.
+  * leave slack to bend it to avoid the cobbler pins and JP3.  I also bent it around the ground wire at f7 to e7.  I like the wires to lay flat on the protoboard where possible, instead of crossing over each other.
 * green wire (GPIO23) from h3 to i18
 * yellow wire (GPIO24) from h1 to i19
 * 4.7K resistor from a14 to power bus (+)
@@ -92,7 +92,7 @@ Step by step:
 
 ## <a name="link_wiring"></a>Sensor Wiring
 
-* Install a 5 pin right angle header on the **back** of the light sensor breakout board.  This will position it out of the way of the light, and the mounting holes are on the other end.
+* Install a 5 pin right angle header on the **back** of the light sensor breakout board.  This will position it out of the way of the light, and the mounting holes are on the other end.  Solder the header from the back, where the pads exist on the breakout board.
 * The 5 wire cable for the light sensor is 'straight through'.  Just make sure that cable is the right way up, so that that ground and power do not get reversed when connecting from the header on the protoboard, to the right angle header on the sensor breakout board.
 * Many of the temperature sensors only have 3 wires.  Some have a fourth wire for the shield on the cable.  If it exists, the shield connects to the extra pin on the 4 pin header.
 
