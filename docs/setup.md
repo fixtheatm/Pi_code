@@ -63,7 +63,7 @@ There are 2 different cases for the configuration settings.  For a specific stat
 * Interfacing Options
   * SSH
     * SSH can be used to connect to photobioreactor stations from other systems.  Without needed to connect a screen and keyboard.  **Only** enable the SSH server if it is needed.  As long as a good password is being used, it is reasonably safe, but having the server running on the rPi does open another potential way for undesired access to the system.
-      * A good password is on that can not be easily guessed, and is known by as few people as possible.
+      * A good password is one that can not be easily guessed, and is known by as few people as possible.
 
 ## <a name="link_prereq"></a>Prerequisites setup
 
