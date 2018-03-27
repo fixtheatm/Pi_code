@@ -7,7 +7,19 @@ Handle a one wire temperature sensor (DS18B20)
 import os
 from datetime import datetime
 from genericsensor import Sensor
-import temperature
+try:
+    import temperature
+except ImportError as exc:
+    # TemperatureSensor.save_temperature_path('junk') # no forward referencing allowed
+    def init_import(address: str):
+        '''Create an dummy import file'''
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        # import_path = os.path.join(dir_path, TemperatureSensor.IMPORT_SPEC)
+        import_path = os.path.join(dir_path, 'temperature.py') # no forward ref
+        with open(import_path, 'w') as import_fl:
+            import_fl.write("address = '{}'\n".format(address))
+    init_import('junk')
+    import temperature
 
 
 def chomp(str_data: str):

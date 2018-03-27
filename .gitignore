@@ -1,4 +1,5 @@
 *.pyc
+photobioreactor.py
 temperature.py
 httpsend.log
 __pycache__

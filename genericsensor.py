@@ -2,9 +2,20 @@
 Generic top level Sensor class to be extended by all actual sensors.
 """
 
+import os
 import threading
 # import json
-import photobioreactor
+try:
+    import photobioreactor
+except ImportError as exc:
+    def init_import():
+        '''Create an dummy import file'''
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        import_path = os.path.join(dir_path, 'photobioreactor.py')
+        with open(import_path, 'w') as import_fl:
+            import_fl.write("station_id = None\n")
+    init_import()
+    import photobioreactor
 
 
 class Sensor(object):
